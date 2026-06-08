@@ -1,0 +1,349 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap');
+
+:root {
+  --table-green: #457c6b;
+  --table-border: #9e5f2a;
+  --text-main: #ffffff;
+  --text-dark: #1e293b;
+  --pill-bg: #ffffff;
+  --btn-orange: #f28b50;
+  --card-bg: #ffffff;
+}
+
+body {
+  margin: 0;
+  font-family: 'Outfit', -apple-system, sans-serif;
+  width: 650px;
+  min-height: 330px;
+  height: 100vh;
+  overflow: hidden;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-animation * {
+  transition: none !important;
+  animation: none !important;
+}
+
+.app-container {
+  width: 650px;
+  height: 330px;
+  background-color: var(--table-green);
+  border: 12px solid var(--table-border);
+  border-radius: 24px;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.game-board {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* --- Start Screen --- */
+.start-screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+.option-btn-top {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: var(--pill-bg);
+  color: var(--text-dark);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  cursor: pointer;
+  z-index: 20;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.option-btn-top:hover {
+  transform: rotate(90deg);
+}
+
+.start-content h1 {
+  color: var(--text-main);
+  font-size: 3rem;
+  margin: 0;
+  letter-spacing: 2px;
+}
+
+.start-content p {
+  color: var(--text-main);
+  font-size: 1.2rem;
+  margin: 5px 0 0 0;
+}
+
+/* --- Board Top --- */
+.board-top {
+  position: absolute;
+  top: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+}
+
+.hand-name-pill {
+  background: var(--pill-bg);
+  color: var(--text-dark);
+  padding: 5px 20px;
+  border-radius: 20px;
+  font-weight: 800;
+  font-size: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  animation: popIn 0.3s ease-out;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* --- Cards --- */
+.cards-container {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.card-wrapper {
+  width: 90px;
+  height: 130px;
+  perspective: 1000px;
+  cursor: pointer;
+  transition: transform 0.2s ease-out;
+  z-index: 10;
+  position: relative;
+}
+
+.card-wrapper.selected {
+  transform: translateY(-20px);
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.card.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.card-back {
+  background-color: #b91c1c;
+  background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(0, 0, 0, 0.2) 5px, rgba(0, 0, 0, 0.2) 10px);
+  border: 2px solid white;
+}
+
+.card-front {
+  background: var(--card-bg);
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5px;
+  box-sizing: border-box;
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+.card-front.red {
+  color: #ef4444;
+}
+
+.card-front.black {
+  color: var(--text-dark);
+}
+
+.card-front.contributing {
+  border: 4px solid #ef4444;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.8);
+}
+
+.card-wrapper.selected .card-front {
+  border: 4px solid #10b981;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.8);
+}
+
+.card-top {
+  align-self: flex-start;
+}
+
+.card-center {
+  align-self: center;
+  font-size: 2rem;
+}
+
+.card-bottom {
+  align-self: flex-end;
+  transform: rotate(180deg);
+}
+
+
+/* --- Controls Row --- */
+.controls-row {
+  position: absolute;
+  bottom: 25px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.pill-box {
+  background: var(--pill-bg);
+  color: var(--text-dark);
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  min-width: 120px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pill-label {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin-right: 10px;
+}
+
+.space-btn {
+  background: var(--btn-orange);
+  color: white;
+  border: none;
+  padding: 10px 40px;
+  border-radius: 25px;
+  font-weight: 800;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s;
+  font-family: 'Outfit', sans-serif;
+}
+
+.space-btn:active {
+  transform: scale(0.95);
+}
+
+.help-btn {
+  background: var(--pill-bg);
+  color: var(--text-dark);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-weight: 800;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- Modal --- */
+.rules-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.rules-modal {
+  background: white;
+  border: 4px solid black;
+  border-radius: 16px;
+  width: 80%;
+  max-height: 80%;
+  padding: 20px;
+  position: relative;
+  overflow-y: auto;
+  color: black;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.rules-content {
+  text-align: center;
+}
+
+.rules-content h3 {
+  margin-top: 0;
+}
+
+.rankings-list-simple {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-align: left;
+  margin-top: 15px;
+  font-weight: 600;
+}

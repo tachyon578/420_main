@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Hide & Hold'em",
+  "version": "1.0",
+  "description": "Browser-based 1-player draw poker game",
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Play Hide & Hold'em"
+  },
+  "icons": {
+    "16": "favicon.svg",
+    "48": "favicon.svg",
+    "128": "favicon.svg"
+  }
+}
